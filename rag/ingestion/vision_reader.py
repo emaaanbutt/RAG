@@ -5,7 +5,7 @@ class VisionReader:
         self.model_name = model_name
         self.pipe = None
 
-    def describe(self, png_byes: bytes) -> str:
+    def describe(self, png_bytes: bytes) -> str:
         from PIL import Image
         from transformers import pipeline
 
@@ -15,14 +15,14 @@ class VisionReader:
                 model=self.model_name
             )
 
-        image = Image.open(BytesIO(png_byes)).convert("RGB")
+        image = Image.open(BytesIO(png_bytes)).convert("RGB")
 
         messages = [{
             "role": "user",
             "content": [
                 {"type": "image", "image": image},
                 {"type": "text", "text": (
-                    "Describe charts, diagrams, and important labels."
+                    "Describe charts, diagrams, and important labels. "
                     "If a word or value is unreadable, say so. Do not guess numbers."
                 )},
             ],

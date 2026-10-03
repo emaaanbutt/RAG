@@ -34,15 +34,15 @@ class PdfLoader:
 
                 for table_number, table in enumerate(page.find_tables(), start=1):
                     rows = table.extract()
-                    lines = ["|".join(str(cell or "").strip() for cell in row) for row in rows]
+                    lines = [" | ".join(str(cell or "").strip() for cell in row) for row in rows]
 
                     table_text = "\n".join(lines).strip()
 
                     if table_text:
                         documents.append(Document(
                             page_content=(
-                                f"Table {table_number} on PDF page"
-                                f"{page_number}\n{table_number}"
+                                f"Table {table_number} on PDF page {page_number}\n"
+                                f"{table_text}"
                             ),
                             metadata={
                                 **location,
@@ -51,23 +51,16 @@ class PdfLoader:
                             },
                         ))
 
-                    if self.vision_reader is not None:
-                        pixels  = page.get_pixmap(
-                            matrix= pymupdf.Matrix(2,2),
-                            alpha= False
-                        )
-
-                        description = self.vision_reader.describe(
-                            pixels.tobytes("png")
-                        )
-
-                        if description:
-                            documents.append(Document(
-                                page_content=description,
-                                metadata={
-                                    **location,
-                                    "kind": "visual_description"
-                                },
-                            ))
+                if self.vision_reader is not None:
+                    pixels = page.get_pixmap(
+                        matrix=pymupdf.Matrix(2, 2),
+                        alpha=False,
+                    )
+                    description = self.vision_reader.describe(pixels.tobytes("png"))
+                    if description:
+                        documents.append(Document(
+                            page_content=description,
+                            metadata={**location, "kind": "visual_description"},
+                        ))
 
         return documents

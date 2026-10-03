@@ -23,13 +23,3 @@ class Settings:
     @property
     def chroma_dir(self) -> Path:
         return self.index_dir / "chroma"
-
-    @property
-    def evidence_path(self) -> Path:
-        return self.index_dir / "evidence.jsonl"
-
-    @property
-    def numeric_path(self) -> Path:
-        return self.index_dir / "measurements.sqlite"
-
-    

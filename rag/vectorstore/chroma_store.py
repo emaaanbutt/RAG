@@ -32,13 +32,7 @@ class ChromaStore:
 
         for start in range(0, len(documents), batch_size):
             batch = documents[start:start + batch_size]
-            db.add_documents(
-                batch,
-                ids=[
-                    doc.metadata["evidence_id"]
-                    for doc in batch
-                ],
-            )
+            db.add_documents(batch)
 
     def search(
         self,
