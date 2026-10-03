@@ -1,4 +1,4 @@
-# WHO PDF + Excel RAG
+# RAG Bot
 
 This learning project answers questions from the WHO *World Health Statistics 2024* PDF and its Excel annex in `data/raw/who_2024/`.
 
@@ -19,7 +19,7 @@ A `.venv` already exists in this workspace. For a new checkout, create one:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements-core.txt
+python -m pip install -r requirements.txt
 ```
 
 Edit the project `.env` file and paste your Groq API key after `GROQ_API_KEY=`. `.env` is ignored by Git. `GROQ_MODEL` defaults to `openai/gpt-oss-20b`, hosted by Groq. The Python `openai` package is used only as an OpenAI-compatible client; requests go to `api.groq.com`.
@@ -43,10 +43,9 @@ If the Hugging Face model is already cached and network checks are slow, run com
 
 ## Evaluation
 
-RAGAS is an optional install because it is needed only when evaluating. The app's **Evaluate last answer with RAGAS** button and `eval/run.py` report *faithfulness*: whether the answer is supported by retrieved text. The batch script also checks whether the expected PDF page or workbook row appeared in retrieval. Evaluation makes extra Groq API calls.
+The app's **Evaluate last answer with RAGAS** button and `eval/run.py` report *faithfulness*: whether the answer is supported by retrieved text. The batch script also checks whether the expected PDF page or workbook row appeared in retrieval. Evaluation makes extra Groq API calls.
 
 ```bash
-python -m pip install -r requirements-eval.txt
 python -m eval.run --limit 1
 python -m eval.run --limit 3
 ```

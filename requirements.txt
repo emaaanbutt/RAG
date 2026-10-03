@@ -10,3 +10,8 @@ rank-bm25
 openai>=1.109,<2
 python-dotenv
 streamlit>=1.42,<2
+ragas==0.4.3
+docling
+transformers
+torch
+pillow

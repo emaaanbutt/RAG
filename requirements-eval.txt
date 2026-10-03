@@ -1,2 +1,0 @@
--r requirements-core.txt
-ragas==0.4.3
