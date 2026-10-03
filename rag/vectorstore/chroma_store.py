@@ -44,4 +44,21 @@ class ChromaStore:
             k=k,
         )
 
+    def all_documents(self) -> list[Document]:
+        data = self._open().get(include=["documents", "metadatas"])
+
+        return [
+            Document(
+                id=doc_id,
+                page_content=content,
+                metadata=metadata or {}
+            )
+
+            for doc_id, content, metadata in zip(
+                data["ids"],
+                data["documents"],
+                data["metadatas"],
+            )
+        ]
+
     
