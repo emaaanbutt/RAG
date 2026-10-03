@@ -1,0 +1,22 @@
+[
+  {
+    "question": "What does the report say about COVID-19 and life expectancy?",
+    "reference": "COVID-19 reversed nearly a decade of progress within two years. Global life expectancy at birth fell by 0.7 years in 2020 and a further 1.1 years in 2021.",
+    "source": "world_health_statistics_2024.pdf",
+    "page": 15
+  },
+  {
+    "question": "As of what month and year are the Excel annex figures latest available?",
+    "reference": "May 2024.",
+    "source": "world_health_statistics_2024_annex.xlsx",
+    "sheet": "readme",
+    "row": 1
+  },
+  {
+    "question": "For Pakistan, what is the adolescent birth rate for ages 15–19 in the annex, and what is the data year?",
+    "reference": "41.0 births per 1000 women, data year 2021.",
+    "source": "world_health_statistics_2024_annex.xlsx",
+    "sheet": "data",
+    "row": 7023
+  }
+]

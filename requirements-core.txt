@@ -1,12 +1,12 @@
 pymupdf
 openpyxl
-langchain
 langchain-core
-langchain-community
+langchain-community==0.4.1
 langchain-text-splitters
 langchain-huggingface
 langchain-chroma
 sentence-transformers
 rank-bm25
-transformers
-torch
+openai>=1.109,<2
+python-dotenv
+streamlit>=1.42,<2

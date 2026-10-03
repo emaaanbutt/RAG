@@ -21,6 +21,11 @@ class HybridRetriever:
 
 
     def search(self, question: str, k:int =5) -> list[Document]:
+        figure = re.search(r"\bfigure\s+\d+\.\d+\b", question.lower())
+        exact_results = (
+            [doc for doc in self.documents if figure.group() in doc.page_content.lower()][:k]
+            if figure else []
+        )
         vector_results = self.store.search(question, k=k*2)
 
         scores = self.bm25.get_scores(tokenize(question))
@@ -39,8 +44,9 @@ class HybridRetriever:
         combined = []
         seen = set()
 
-        for position in range(max(len(vector_results), len(keyword_results))):
-            for group in (vector_results, keyword_results):
+        groups = (exact_results, vector_results, keyword_results)
+        for position in range(max(len(group) for group in groups)):
+            for group in groups:
                 if position < len(group):
                     doc = group[position]
 
